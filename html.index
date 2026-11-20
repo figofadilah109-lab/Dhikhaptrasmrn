@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Futsal Seru — Belajar Futsal Seru!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --surface: #ffffff;
+      --primary: #0f766e;
+      --primary-dark: #115e59;
+      --accent: #f97316;
+      --text: #0f172a;
+      --muted: #475569;
+      --border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 24px;
+    }
+
+    .brand {
+      font-weight: 800;
+      font-size: 1.15rem;
+      color: var(--primary-dark);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    header {
+      background: linear-gradient(135deg, #0f766e 0%, #0284c7 100%);
+      color: #ffffff;
+      padding: 72px 24px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    header p {
+      max-width: 660px;
+      margin: 0 auto 24px;
+      font-size: 1.05rem;
+      opacity: 0.95;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #ffffff;
+      font-weight: 700;
+      padding: 12px 24px;
+      border-radius: 10px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    .btn:hover {
+      filter: brightness(0.95);
+    }
+
+    .btn-secondary {
+      background: #e2e8f0;
+      color: var(--text);
+    }
+
+    section {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 56px 24px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #ccfbf1;
+      color: var(--primary-dark);
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 1.75rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .lead {
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .card .icon {
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+    }
+
+    .card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .rules-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .rules-strip span {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    canvas {
+      width: 100%;
+      max-width: 900px;
+      height: auto;
+      display: block;
+      margin: 0 auto 20px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: #15803d;
+    }
+
+    .legend-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 0.92rem;
+    }
+
+    .num-circle {
+      min-width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #ffffff;
+      font-weight: 700;
+      display: grid;
+      place-items: center;
+      font-size: 0.85rem;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .quiz-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .option-btn {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 12px 16px;
+      margin-top: 10px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #f8fafc;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .option-btn:hover {
+      border-color: var(--primary);
+    }
+
+    .option-btn.correct {
+      background: #dcfce7;
+      border-color: #16a34a;
+      color: #14532d;
+    }
+
+    .option-btn.wrong {
+      background: #fee2e2;
+      border-color: #dc2626;
+      color: #7f1d1d;
+    }
+
+    footer {
+      text-align: center;
+      padding: 36px 24px;
+      background: #0f172a;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+    }
+
+    footer p + p {
+      margin-top: 6px;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="brand">⚽ Futsal Seru</div>
+    <div class="nav-links">
+      <a href="#materi">Materi</a>
+      <a href="#lapangan">Lapangan</a>
+      <a href="#teknik">Teknik</a>
+      <a href="#simulasi">Simulasi</a>
+      <a href="#kuis">Kuis</a>
+    </div>
+  </nav>
+
+  <header>
+    <h1>Belajar Futsal Seru!</h1>
+    <p>Materi PJOK interaktif: kenali lapangan, pelajari teknik dasar, lihat simulasi taktik 2D, lalu uji pemahamanmu lewat kuis.</p>
+    <a href="#materi" class="btn">Mulai belajar</a>
+  </header>
+
+  <section id="materi">
+    <span class="badge">Materi 1</span>
+    <h2>Apa itu futsal?</h2>
+    <p class="lead">Futsal adalah permainan bola yang dimainkan dua tim, masing-masing terdiri dari 5 pemain termasuk penjaga gawang. Permainan dilakukan di lapangan yang lebih kecil dengan bola yang lebih kecil dan pantulan lebih rendah, sehingga menuntut kecepatan, ketepatan, dan kerja sama.</p>
+
+    <div class="grid-3">
+      <div class="card">
+        <div class="icon">🏟️</div>
+        <h3>Lapangan kecil</h3>
+        <p>Ruang gerak terbatas membuat permainan cepat dan intens.</p>
+      </div>
+      <div class="card">
+        <div class="icon">⚽</div>
+        <h3>Bola pantul rendah</h3>
+        <p>Bola mudah dikontrol di kaki, cocok untuk latihan teknik.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🤝</div>
+        <h3>Kerja sama tim</h3>
+        <p>Operan pendek dan gerakan tanpa bola menentukan hasil akhir.</p>
+      </div>
+    </div>
+
+    <div class="rules-strip">
+      <span>⏱ 2 babak × 20 menit</span>
+      <span>🔁 Pergantian tanpa batas</span>
+      <span>🧤 1 penjaga gawang per tim</span>
+      <span>🎯 Tendangan bebas langsung setelah pelanggaran tim beruntun</span>
+    </div>
+  </section>
+
+  <section id="lapangan">
+    <span class="badge">Materi 2</span>
+    <h2>Lapangan futsal</h2>
+    <p class="lead">Lapangan futsal berbentuk persegi panjang dengan ukuran standar FIFA sekitar 38–42 m × 18–22 m. Perhatikan nomor pada gambar, lalu cocokkan dengan keterangannya.</p>
+
+    <canvas id="pitchCanvas" width="900" height="500" role="img" aria-label="Gambar lapangan futsal dengan penomoran bagian-bagiannya"></canvas>
+
+    <div class="legend-list">
+      <div class="legend-item"><div class="num-circle">1</div><div>Garis dan lingkaran tengah. Lingkaran berjari-jari 3 m.</div></div>
+      <div class="legend-item"><div class="num-circle">2</div><div>Area penalti. Dibentuk busur 6 m dari tiang gawang.</div></div>
+      <div class="legend-item"><div class="num-circle">3</div><div>Titik penalti, berjarak 6 m dari garis gawang.</div></div>
+      <div class="legend-item"><div class="num-circle">4</div><div>Titik penalti kedua, berjarak 10 m dari garis gawang.</div></div>
+      <div class="legend-item"><div class="num-circle">5</div><div>Gawang, berukuran lebar 3 m dan tinggi 2 m.</div></div>
+    </div>
+  </section>
+
+  <section id="teknik">
+    <span class="badge">Materi 3</span>
+    <h2>Teknik dasar</h2>
+    <p class="lead">Tekan tombol Dengarkan untuk mendengar penjelasan setiap teknik.</p>
+    <div id="techniqueList" class="grid-3"></div>
+  </section>
+
+  <section id="simulasi">
+    <span class="badge">Materi 4 · Interaktif</span>
+    <h2>Simulator taktik 2D</h2>
+    <p class="lead">Pilih skenario, lalu tekan Putar. Biru: tim menyerang. Merah muda: tim bertahan. Kuning: penjaga gawang. Garis putus-putus menunjukkan arah bola.</p>
+
+    <div class="controls">
+      <select id="scenarioSelect" style="padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border); font-weight: 600;">
+        <option value="wallpass">Operan Satu-Dua (Wall Pass)</option>
+        <option value="overlap">Serangan Overlap Sayap</option>
+      </select>
+      <button id="playBtn" class="btn" type="button">▶ Putar</button>
+      <button id="resetBtn" class="btn btn-secondary" type="button">↺ Reset</button>
+    </div>
+
+    <canvas id="tacticCanvas" width="900" height="500" role="img" aria-label="Simulasi pergerakan pemain dan bola di lapangan futsal"></canvas>
+    <div id="tacticStatus" aria-live="polite" style="font-weight: 600; color: var(--primary-dark);">Siap menjalankan skenario.</div>
+  </section>
+
+  <section id="kuis">
+    <span class="badge">Materi 5</span>
+    <h2>Kuis futsal</h2>
+    <div class="quiz-box">
+      <div id="quizProgress" style="font-size: 0.9rem; color: var(--muted); margin-bottom: 8px;"></div>
+      <div id="quizQuestion" style="font-size: 1.15rem; font-weight: 700;"></div>
+      <div id="quizOptions"></div>
+      <div id="quizFeedback" style="margin-top: 14px; font-weight: 600;"></div>
+      <div style="margin-top: 16px;">
+        <button id="nextQuizBtn" class="btn" type="button" style="display: none;">Soal berikutnya</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>📘 Media Pembelajaran PJOK · Materi Futsal Interaktif</p>
+    <p>Dibuat oleh: <b>Dhika Putra Sumarna</b></p>
+    <p>NIM <b>41182191240021</b> · Universitas Muhammadiyah Indonesia</p>
+  </footer>
+
+  <script>
+    // 1. Gambar Lapangan Futsal Berpenomoran (Materi 2)
+    const pitchCanvas = document.getElementById("pitchCanvas");
+    const pCtx = pitchCanvas.getContext("2d");
+
+    function drawPitch(ctx, w, h, withLabels = true) {
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = "#15803d";
+      ctx.fillRect(0, 0, w, h);
+
+      const pad = 40;
+      const pw = w - pad * 2;
+      const ph = h - pad * 2;
+
+      ctx.strokeStyle = "#ffffff";
+      ctx.lineWidth = 3;
+      ctx.strokeRect(pad, pad, pw, ph);
+
+      // Garis tengah & lingkaran tengah (1)
+      const midX = pad + pw / 2;
+      const midY = pad + ph / 2;
+      ctx.beginPath();
+      ctx.moveTo(midX, pad);
+      ctx.lineTo(midX, pad + ph);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.arc(midX, midY, 55, 0, Math.PI * 2);
+      ctx.stroke();
+
+      // Area penalti kiri & kanan (2)
+      ctx.strokeRect(pad, midY - 105, 110, 210);
+      ctx.strokeRect(pad + pw - 110, midY - 105, 110, 210);
+
+      // Titik penalti 6m (3) & 10m (4)
+      ctx.fillStyle = "#ffffff";
+      ctx.beginPath();
+      ctx.arc(pad + 85, midY, 4, 0, Math.PI * 2);
+      ctx.arc(pad + 135, midY, 4, 0, Math.PI * 2);
+      ctx.arc(pad + pw - 85, midY, 4, 0, Math.PI * 2);
+      ctx.arc(pad + pw - 135, midY, 4, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Gawang kiri & kanan (5)
+      ctx.strokeStyle = "#facc15";
+      ctx.lineWidth = 4;
+      ctx.strokeRect(pad - 14, midY - 45, 14, 90);
+      ctx.strokeRect(pad + pw, midY - 45, 14, 90);
+
+      if (withLabels) {
+        const markers = [
+          { n: "1", x: midX + 24, y: midY - 20 },
+          { n: "2", x: pad + 55, y: midY - 75 },
+          { n: "3", x: pad + 85, y: midY + 20 },
+          { n: "4", x: pad + 135, y: midY + 20 },
+          { n: "5", x: pad + pw + 7, y: midY }
+        ];
+
+        markers.forEach((m) => {
+          ctx.fillStyle = "#0f172a";
+          ctx.beginPath();
+          ctx.arc(m.x, m.y, 14, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = "#ffffff";
+          ctx.font = "bold 13px sans-serif";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText(m.n, m.x, m.y);
+        });
+      }
+    }
+
+    drawPitch(pCtx, pitchCanvas.width, pitchCanvas.height, true);
+
+    // 2. Teknik Dasar + Dengarkan (Materi 3)
+    const techniques = [
+      {
+        title: "Passing (Mengoper Bola)",
+        desc: "Gunakan kaki bagian dalam untuk operan mendatar yang akurat dan mudah dikontrol rekan setim."
+      },
+      {
+        title: "Dribbling (Menggiring Bola)",
+        desc: "Sentuh bola dengan sol sepatu atau punggung kaki sambil menjaga bola tetap dekat dengan kaki."
+      },
+      {
+        title: "Shooting (Menendang ke Gawang)",
+        desc: "Arahkan pandangan ke target, kunci pergelangan kaki, dan ayunkan kaki ke arah bola dengan terukur."
+      }
+    ];
+
+    const techContainer = document.getElementById("techniqueList");
+    techniques.forEach((t) => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <h3>${t.title}</h3>
+        <p style="margin-bottom: 14px;">${t.desc}</p>
+        <button type="button" class="btn" style="padding: 8px 14px; font-size: 0.85rem;">🔊 Dengarkan</button>
+      `;
+      card.querySelector("button").addEventListener("click", () => {
+        if ("speechSynthesis" in window) {
+          window.speechSynthesis.cancel();
+          const utter = new SpeechSynthesisUtterance(`${t.title}. ${t.desc}`);
+          utter.lang = "id-ID";
+          window.speechSynthesis.speak(utter);
+        }
+      });
+      techContainer.appendChild(card);
+    });
+
+    // 3. Simulator Taktik 2D (Materi 4)
+    const tacticCanvas = document.getElementById("tacticCanvas");
+    const tCtx = tacticCanvas.getContext("2d");
+    const statusEl = document.getElementById("tacticStatus");
+    const scenarioSelect = document.getElementById("scenarioSelect");
+    const playBtn = document.getElementById("playBtn");
+    const resetBtn = document.getElementById("resetBtn");
+
+    let animId = null;
+    let progress = 0;
+
+    function getActors(t, mode) {
+      const atk1 = { x: 240 + t * 260, y: 290 - t * 40, color: "#2563eb" };
+      const atk2 = {
+        x: mode === "wallpass" ? 390 + t * 180 : 320 + t * 280,
+        y: mode === "wallpass" ? 170 : 120 + t * 50,
+        color: "#2563eb"
+      };
+      const def1 = { x: 470 + t * 80, y: 240, color: "#f472b6" };
+      const gk = { x: 800, y: 250, color: "#facc15" };
+      const ball = {
+        x: t < 0.5 ? atk1.x + (atk2.x - atk1.x) * (t * 2) : atk2.x + (760 - atk2.x) * ((t - 0.5) * 2),
+        y: t < 0.5 ? atk1.y + (atk2.y - atk1.y) * (t * 2) : atk2.y + (250 - atk2.y) * ((t - 0.5) * 2),
+        color: "#ffffff"
+      };
+      return { atk1, atk2, def1, gk, ball };
+    }
+
+    function renderTactic(t) {
+      drawPitch(tCtx, tacticCanvas.width, tacticCanvas.height, false);
+      const mode = scenarioSelect.value;
+      const { atk1, atk2, def1, gk, ball } = getActors(t, mode);
+
+      // Garis putus-putus arah bola
+      tCtx.save();
+      tCtx.setLineDash([7, 7]);
+      tCtx.strokeStyle = "#fef08a";
+      tCtx.lineWidth = 2.5;
+      tCtx.beginPath();
+      tCtx.moveTo(240, 290);
+      tCtx.lineTo(atk2.x, atk2.y);
+      tCtx.lineTo(760, 250);
+      tCtx.stroke();
+      tCtx.restore();
+
+      const drawCircle = (obj, r, stroke = "#0f172a") => {
+        tCtx.fillStyle = obj.color;
+        tCtx.beginPath();
+        tCtx.arc(obj.x, obj.y, r, 0, Math.PI * 2);
+        tCtx.fill();
+        tCtx.lineWidth = 2;
+        tCtx.strokeStyle = stroke;
+        tCtx.stroke();
+      };
+
+      drawCircle(atk1, 14);
+      drawCircle(atk2, 14);
+      drawCircle(def1, 14);
+      drawCircle(gk, 14);
+      drawCircle(ball, 7, "#0f172a");
+    }
+
+    function stepAnim() {
+      progress += 0.012;
+      if (progress >= 1) {
+        progress = 1;
+        renderTactic(progress);
+        statusEl.textContent = "Skenario selesai: bola diarahkan ke depan gawang.";
+        cancelAnimationFrame(animId);
+        animId = null;
+        return;
+      }
+      renderTactic(progress);
+      statusEl.textContent = progress < 0.5 ? "Fase 1: Operan kombinasi antar pemain biru..." : "Fase 2: Pergerakan lanjutan menuju area gawang...";
+      animId = requestAnimationFrame(stepAnim);
+    }
+
+    playBtn.addEventListener("click", () => {
+      if (animId) return;
+      if (progress >= 1) progress = 0;
+      stepAnim();
+    });
+
+    resetBtn.addEventListener("click", () => {
+      if (animId) {
+        cancelAnimationFrame(animId);
+        animId = null;
+      }
+      progress = 0;
+      renderTactic(progress);
+      statusEl.textContent = "Siap menjalankan skenario.";
+    });
+
+    scenarioSelect.addEventListener("change", () => {
+      progress = 0;
+      renderTactic(progress);
+    });
+
+    renderTactic(0);
+
+    // 4. Kuis Futsal (Materi 5)
+    const quizData = [
+      {
+        q: "Berapa jumlah pemain tiap tim dalam permainan futsal termasuk penjaga gawang?",
+        options: ["4 pemain", "5 pemain", "6 pemain", "7 pemain"],
+        answer: 1
+      },
+      {
+        q: "Berapa jarak titik penalti kedua dari garis gawang?",
+        options: ["4 meter", "6 meter", "10 meter", "12 meter"],
+        answer: 2
+      },
+      {
+        q: "Berapa lama durasi waktu normal pertandingan futsal?",
+        options: ["2 × 15 menit", "2 × 20 menit", "2 × 25 menit", "2 × 45 menit"],
+        answer: 1
+      }
+    ];
+
+    let qIdx = 0;
+    let score = 0;
+    const qProgress = document.getElementById("quizProgress");
+    const qQuestion = document.getElementById("quizQuestion");
+    const qOptions = document.getElementById("quizOptions");
+    const qFeedback = document.getElementById("quizFeedback");
+    const nextBtn = document.getElementById("nextQuizBtn");
+
+    function loadQuestion() {
+      const item = quizData[qIdx];
+      qProgress.textContent = `Soal ${qIdx + 1} dari ${quizData.length}`;
+      qQuestion.textContent = item.q;
+      qOptions.innerHTML = "";
+      qFeedback.textContent = "";
+      nextBtn.style.display = "none";
+
+      item.options.forEach((opt, idx) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "option-btn";
+        btn.textContent = opt;
+        btn.addEventListener("click", () => {
+          const allBtns = qOptions.querySelectorAll("button");
+          allBtns.forEach((b) => (b.disabled = true));
+
+          if (idx === item.answer) {
+            btn.classList.add("correct");
+            score++;
+            qFeedback.textContent = "Benar! Jawabanmu tepat.";
+          } else {
+            btn.classList.add("wrong");
+            allBtns[item.answer].classList.add("correct");
+            qFeedback.textContent = "Kurang tepat. Perhatikan jawaban yang benar.";
+          }
+          nextBtn.style.display = "inline-block";
+        });
+        qOptions.appendChild(btn);
+      });
+    }
+
+    nextBtn.addEventListener("click", () => {
+      qIdx++;
+      if (qIdx < quizData.length) {
+        loadQuestion();
+      } else {
+        qProgress.textContent = "Kuis selesai";
+        qQuestion.textContent = `Skor akhir kamu: ${score} dari ${quizData.length}`;
+        qOptions.innerHTML = "";
+        qFeedback.textContent = "Tekan tombol di bawah untuk mengulang kuis.";
+        nextBtn.textContent = "Ulangi kuis";
+        nextBtn.onclick = () => {
+          qIdx = 0;
+          score = 0;
+          nextBtn.textContent = "Soal berikutnya";
+          nextBtn.onclick = null;
+          loadQuestion();
+        };
+      }
+    });
+
+    loadQuestion();
+  </script>
+</body>
+</html>
